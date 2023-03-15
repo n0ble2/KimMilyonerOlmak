@@ -1,0 +1,156 @@
+body{
+    background-color: navy;
+}
+
+/* .renk {
+   arkaplan rengi 
+}  */
+
+.navbar-dark .navbar-nav .nav-link { 
+    color: white !important;
+}
+
+.menu_para { /* paranın gelceği kısım */
+    font-size: 24px;
+    border-bottom-left-radius: 67px;
+    color: white;
+    padding-left:60px;
+}
+
+.tane_soru { /* soru ve cevap sayısı */
+    font-size: 24px;
+    background-color: #343a40 !important;
+    border-radius: 999px;
+    color: white;
+    padding: 0px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.col-4 { /* süre/saniye ve soru/cevap sayısı */
+    position: relative;
+    width: 100%;
+    padding-right: 0px !important; 
+    padding-left:  0px !important; 
+}
+
+.sure_col  { /* süre */
+    font-size: 24px;
+    background-color: black;
+    text-align: end;
+    color: white;
+    width: 100%;
+    margin: 0px auto;
+    padding-right: 60px;
+    border-bottom-right-radius: 67px;
+}
+
+.sure_coli  { /* saniye */
+    font-size: 24px;
+    background-color: black;
+    text-align: end;
+    color: white;
+    width: 25%;
+    margin: 0px auto;
+    padding-left: 60px;
+    border-bottom-right-radius: 67px;
+}
+
+.bosluk { /* soru, süre, para ve soruların olduğu kısımın boşluğu */
+    margin-top: 80px;
+}
+
+.sorularin_ciktigi_yer {
+    text-align: center;
+}
+
+.cevap_boşluk { /* cevapların bulunduğu boşluk */
+    margin-top: 30px;;
+}
+
+.cevap_arkaplan {
+    background-color: #343a40;
+    border-radius: 15px;
+    color: white;
+}
+
+button {
+    background-color: transparent;
+    color:white;
+}
+
+.ortala {
+    text-align: center !important;
+    margin-top: 8%;
+    cursor: pointer;
+}
+
+.sayi {
+    text-align: center;
+}
+
+.lose {
+    background-color: #343a40;
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+    height: 5px;
+}
+
+#demo {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    border-radius: 15px;  
+}
+
+.next-soru {
+    text-align: center;
+}
+
+.dikey_cizgi {
+    height: 100%;
+    width: 0.5%;
+    background-color: #343a40;
+    margin:0px auto;
+}
+
+#part {
+    margin:0px auto;
+    color: rgb(0, 0, 0);
+}
+
+.lorem {
+    text-align: center;
+}
+
+/* soru bilince gelen butonlar (ortalanması için)*/
+.kare { 
+    margin-left: 42% !important;
+    margin-right: 42% !important;
+}
+
+.cevap_arkaplan:hover {
+    background-color:black ;
+}
+
+
+
+
+
+
+
+/* temiz dızlama */
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+  }
+  
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }

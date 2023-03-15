@@ -1,0 +1,620 @@
+<!-- SON 10 saniye jokeri kullandırtma -->
+<!-- kazanılan paraya tıklarsan hangi sorunun ne kadar para olduğunu görürsün-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KM</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <div
+      class="modal hide fade in"
+      data-keyboard="false"
+      data-backdrop="static"
+      id="getCodeModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+      style="background-color: white"
+    >
+      <div class="modal-dialog modal-lg">
+        <div
+          style="background-color: black; color: white"
+          class="modal-content"
+        >
+          <div class="modal-header">
+            <h4 class="modal-title">Kim Milyoner Olmak İster?</h4>
+          </div>
+          <div class="modal-body">
+            <strong>Tanıtım ve Kurallar:</strong> <br />
+            <ul>
+              <li>Toplam 10 soru bulunmaktadır.</li>
+              <li>2 tane Joker hakkınız vardır.</li>
+              <ol>
+                <li>Yarı yarıya cevap Jokeri</li>
+                <li>Çift cevap Jokeri</li>
+              </ol>
+              <li>Her soruya verilen süre 45 saniye.</li>
+              <li>
+                Yanlış cevap verirseniz, bütün paranızı
+                <strong>kaybedersiniz.</strong>
+              </li>
+              <li>Süre biterse eğer bildiğiniz soru kadar para alırsınız.</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <p>Tuşa basınca süreniz başlar.</p>
+            <button
+              onclick="exit()"
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              style="background-color: black"
+            >
+              Başla
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--AÇIKLAMA EKRANI BİTTİ-->
+
+    <!--navbar-->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <a class="navbar-brand" style="text-align: center"
+        >Kim Milyoner Olmak İster?</a
+      >
+      <button
+        class="navbar-toggler d-lg-none"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-chevron-double-down"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+          />
+        </svg>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="dropdownId"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >JOKERLER</a
+            >
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <h1
+                id="coker"
+                class="baslik"
+                style="font-size: 26px; text-align: center; margin-bottom: 15px"
+              >
+                <strong>JOKERLER</strong>
+              </h1>
+
+              <p id="san" style="text-align: center">Yarı yarıya Jokeri</p>
+              <input id="elli" type="button" class="joker" onclick="yarim()" />
+
+              <p id="sani" style="text-align: center">Çift Cevap Jokeri</p>
+              <input
+                id="tekrar"
+                type="button"
+                class="joker"
+                onclick="tekrar()"
+              />
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0"></form>
+      </div>
+    </nav>
+    <!-- NAVBAR BİTTİ-->
+    <br />
+    <br />
+    <!-- para -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-4">
+          <div class="sure_col">
+            <h2 id="sureli" class="baslik">SÜRE</h2>
+            <div class="sure_coli"></div>
+            <div id="saniye">45</div>
+          </div>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4">
+          <div style="background-color: black !important" class="menu_para">
+            <p id="miktar" onclick="paralar()"></p>
+            <p id="par"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- para bitti -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+      </div>
+    </div>
+    <!-- ilave süre !! -->
+    <div class="renk">
+      <!-- SORU-->
+      <div class="container-fluid">
+        <div class="row bosluk">
+          <div class="col-4 lose"></div>
+          <div class="col-4">
+            <p id="demo"></p>
+            <!-- çizgiler telefon kısmında sillllllll .lose -->
+          </div>
+          <div class="col-4 lose"></div>
+        </div>
+      </div>
+
+      <div class="cevap_boşluk"></div>
+
+      <!-- a ve b şıkları -->
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-2 cevap_arkaplan">
+            <div
+              id="cvp_a"
+              class="but"
+              onclick="cevap(document.querySelector('#cvp_1').textContent)"
+            >
+              <p class="ortala" id="cvp_1"></p>
+            </div>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-2 cevap_arkaplan">
+            <div
+              id="cvp_b"
+              onclick="cevap(document.querySelector('#cvp_2').textContent)"
+            >
+              <p class="ortala" id="cvp_2"></p>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+
+      <!-- a ve b şıkları -->
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-2"></div>
+          <div class="col-2">
+            <div class="tane_soru">
+              <h1 id="sorum">
+                <div class="sayi" id="index">1</div>
+              </h1>
+            </div>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+      <!-- kaçıncı soru. -->
+
+      <!-- c ve d şıkları-->
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-2 cevap_arkaplan">
+            <div
+              id="cvp_c"
+              onclick="cevap(document.querySelector('#cvp_3').textContent)"
+            >
+              <p class="ortala" id="cvp_3"></p>
+            </div>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-2 cevap_arkaplan">
+            <div
+              id="cvp_d"
+              onclick="cevap(document.querySelector('#cvp_4').textContent);"
+            >
+              <p class="ortala" id="cvp_4"></p>
+            </div>
+          </div>
+          <div class="col-3"></div>
+        </div>
+      </div>
+
+      <!-- c ve d şıkları-->
+
+      <!-- süre bitti ekranı -->
+      <div
+        class="modal hide fade in"
+        data-keyboard="false"
+        data-backdrop="static"
+        id="no-time"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+        style="background-color: black"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-4"></div>
+                  <div class="col-4" style="text-align: center">
+                    <strong>SÜRE DOLDU</strong>
+                  </div>
+                  <div class="col-4"></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-body">
+              <h3 style="text-align: center" id="lt"></h3>
+            </div>
+            <div class="modal-footer">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-1"></div>
+                  <div class="col-4">
+                    <p
+                      type="button"
+                      class="cevap_arkaplan"
+                      style="text-align: center"
+                      onclick="f5()"
+                    >
+                      YENİDEN OYNA
+                    </p>
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- süre bitti ekranı -->
+
+      <!-- evet yada hayır. -->
+
+      <div
+        class="modal hide fade in"
+        data-keyboard="false"
+        data-backdrop="static"
+        id="next-quest"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+        style="background-color: rgb(0, 255, 0)"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">
+                &nbsp;
+                <br />
+                <h3 id="part"></h3>
+              </h4>
+            </div>
+            <div class="modal-body next-soru">
+              <strong>&nbsp;</strong> <br />
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-5">
+                    <h4>SORUNUN DEĞERİ</h4>
+                    <p id="mani"></p>
+                    <br />
+                    &nbsp;
+                    <h4>SONRAKİ SORU</h4>
+                    <p id="questler"></p>
+                    <p style="font-size: 12px">
+                      <strong
+                        >Yeni soruya geçmek istersen, <br />aşşağıdaki butona
+                        tıkla.</strong
+                      >
+                    </p>
+                  </div>
+                  <div class="col-2">
+                    <div class="dikey_cizgi"></div>
+                  </div>
+                  <div class="col-5 lorem">
+                    <h4>KAZANILAN PARA</h4>
+                    <p id="mavi"></p>
+                    &nbsp;<br />
+                    &nbsp; <br />
+                    <h4>LOREM LOREM LOREM</h4>
+                    <p>
+                      Kazanılan parayı şimdi alabilirsin.<br />Tek yapman
+                      gereken <strong>şimdi al </strong> butonuna tıklamak.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-5">
+                    <p style="text-align: center">
+                      <strong>DEVAM ET</strong>
+                    </p>
+                    <div class="kare">
+                      <button
+                        onclick="fark()"
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        &nbsp; &nbsp;
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-1"></div>
+                  <div class="col-5">
+                    <p style="text-align: center"><strong>ŞİMDİ AL</strong></p>
+                    <div class="kare">
+                      <button
+                        onclick="halo()"
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        &nbsp; &nbsp;
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- evet yada hayır. -->
+
+      <!-- paranı şimdi al kısmı D: -->
+
+      <div
+        class="modal hide fade in"
+        data-keyboard="false"
+        data-backdrop="static"
+        id="para_al"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+        style="background-color: black"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Oynadığınız için teşekkür ederiz...</h4>
+            </div>
+            <div class="modal-body">
+              <p style="text-align: center; font-size: 32px">
+                KAZANDIĞINIZ PARA
+              </p>
+              <p style="text-align: center; font-size: 24px" id="aldim"></p>
+            </div>
+            <div class="modal-footer">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-1"></div>
+                  <div class="col-4">
+                    <p
+                      type="button"
+                      class="cevap_arkaplan"
+                      style="margin: 15px; text-align: center"
+                      onclick="f5()"
+                    >
+                      YENİDEN OYNA
+                    </p>
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- paranı şimdi al kısmı :D -->
+
+      <!-- becerirsem bitiş ekranı :/-->
+      <div
+        class="modal hide fade in"
+        data-keyboard="false"
+        data-backdrop="static"
+        id="bitti_umr"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+        style="background-color: pink"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4
+                class="modal-title"
+                style="text-align: center; font-size: 24px"
+              >
+                TEBRİKLER YARIŞMACI
+              </h4>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-12">
+                    <p style="text-align: center">
+                      Bütün soruları bildin!<br /><strong
+                        style="font-size: 32px"
+                        >BRAVO</strong
+                      >
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-1"></div>
+                  <div class="col-10">
+                    <div class="video-container">
+                      <iframe
+                        src="https://www.youtube.com/embed/PHgc8Q6qTjc?autoplay=1"
+                        title="Tebrikler"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                      ></iframe>
+                    </div>
+                  </div>
+                  <div class="col-1"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-1"></div>
+                  <div class="col-4">
+                    <p
+                      type="button"
+                      class="cevap_arkaplan"
+                      style="text-align: center; margin: 12px"
+                      onclick="f5()"
+                    >
+                      YENİDEN OYNA
+                    </p>
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- becerirsem bitiş ekranı :D -->
+
+      <!-- yanlış cevap verdiğimizde gelecek olan ekran. -->
+      <div
+        class="modal hide fade in"
+        data-keyboard="false"
+        data-backdrop="static"
+        id="olmadi"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+        style="background-color: rgb(255, 0, 0)"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-4"></div>
+                  <div class="col-4" style="text-align: center">
+                    <strong>YANLIŞ CEVAP</strong>
+                  </div>
+                  <div class="col-4"></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-body">
+              <h3 style="text-align: center" id="rt"></h3>
+            </div>
+            <div class="modal-footer">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-1"></div>
+                  <div class="col-4">
+                    <p
+                      type="button"
+                      class="cevap_arkaplan"
+                      style="text-align: center"
+                      onclick="f5()"
+                    >
+                      YENİDEN OYNA
+                    </p>
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- yanlış cevap verdiğimizde gelecek olan ekran. -->
+    </div>
+    <!-- JAVA SCRIPT-->
+    <script src="sorular.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+      integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $("#getCodeModal").modal("show");
+    </script>
+    <script>
+      //this remove the close button on top if you need
+      //$("#getCodeModal").unbind("click");
+      //$("#getCodeModal").find(".close").remove();
+    </script>
+  </body>
+</html>
